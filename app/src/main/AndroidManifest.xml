@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MakingBetterDecisions">
         <activity
+            android:name=".UseCase_Activity"
+            android:exported="false"
+            android:label="@string/title_activity_use_case" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
