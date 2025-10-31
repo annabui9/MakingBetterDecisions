@@ -16,12 +16,12 @@
         />
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.makingbetterdecisions.HomeFragment"
+        android:name="com.example.makingbetterdecisions.AccountFragment"
         android:label="Use"
         />
     <fragment
         android:id="@+id/navigation_account"
-        android:name="com.example.makingbetterdecisions.HomeFragment"
+        android:name="com.example.makingbetterdecisions.AccountFragment"
         android:label="Account"
         />
 
