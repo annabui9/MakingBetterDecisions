@@ -8,58 +8,78 @@
     tools:context=".HomeFragment">
 
     <!-- Logo -->
+
+    <!-- Glowing orb background -->
+
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ethics"
+        android:layout_marginTop="56dp"
         android:contentDescription="@string/app_name"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ethics"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp" />
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Glowing orb background -->
-    <View
+    <ImageView
         android:id="@+id/glowOrb"
         android:layout_width="280dp"
         android:layout_height="280dp"
         android:background="@drawable/orb_gradient"
         android:alpha="0.9"
+        android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp" />
+        android:layout_gravity="center" />
 
-    <!-- Main quote text -->
-    <TextView
-        android:id="@+id/quoteText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Work your moral muscle"
-        android:textColor="@android:color/white"
-        android:textSize="28sp"
-        android:fontFamily="@font/logo_font"
-        android:gravity="center"
+    <!-- Animated orb (floating + pulsing) -->
+    <ImageView
+        android:id="@+id/animatedOrb"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:background="@drawable/orb_gradient"
+        android:alpha="0.6"
         android:layout_marginTop="24dp"
-        app:layout_constraintTop_toTopOf="@id/glowOrb"
-        app:layout_constraintBottom_toBottomOf="@id/glowOrb"
+        app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center"
+        android:animation="@anim/pulse" />
+
+    <!-- Text image -->
 
     <!-- Courtesy credit -->
+
+    <ImageView
+        android:id="@+id/quoteImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Work your moral muscle text"
+        android:src="@drawable/moral_muscle"
+        app:layout_constraintBottom_toBottomOf="@id/glowOrb"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/glowOrb"
+        app:layout_constraintVertical_bias="0.766" />
+
     <TextView
         android:id="@+id/courtesyText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
+        android:gravity="center"
         android:text="Courtesy of Dr. Shannon Vallor, Edinburgh Futures Institute, University of Edinburgh"
         android:textColor="#C0D6FF"
         android:textSize="10sp"
-        android:gravity="center"
-        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
