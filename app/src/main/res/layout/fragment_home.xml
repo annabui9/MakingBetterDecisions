@@ -8,9 +8,6 @@
     tools:context=".HomeFragment">
 
     <!-- Logo -->
-
-    <!-- Glowing orb background -->
-
     <ImageView
         android:id="@+id/logoImage"
         android:layout_width="200dp"
@@ -19,37 +16,34 @@
         android:contentDescription="@string/app_name"
         android:src="@drawable/ethics"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Glowing background orb (soft halo) -->
     <ImageView
         android:id="@+id/glowOrb"
         android:layout_width="280dp"
         android:layout_height="280dp"
         android:background="@drawable/orb_gradient"
-        android:alpha="0.9"
+        android:alpha="0.3"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_gravity="center" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Animated orb (floating + pulsing) -->
+    <!-- Animated orb (pulsing center) -->
     <ImageView
         android:id="@+id/animatedOrb"
         android:layout_width="280dp"
         android:layout_height="280dp"
         android:background="@drawable/orb_gradient"
-        android:alpha="0.6"
+        android:alpha="0.7"
         android:layout_marginTop="24dp"
         app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_gravity="center"
-        android:animation="@anim/pulse" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Text image -->
+    <!-- "Work your moral muscle" text image -->
 
     <!-- Courtesy credit -->
 
@@ -60,12 +54,12 @@
         android:layout_marginTop="16dp"
         android:contentDescription="Work your moral muscle text"
         android:src="@drawable/moral_muscle"
-        app:layout_constraintBottom_toBottomOf="@id/glowOrb"
+        app:layout_constraintBottom_toBottomOf="@id/animatedOrb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/glowOrb"
-        app:layout_constraintVertical_bias="0.766" />
+        app:layout_constraintTop_toTopOf="@id/animatedOrb"
+        app:layout_constraintVertical_bias="0.529" />
 
     <TextView
         android:id="@+id/courtesyText"
@@ -78,8 +72,8 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
