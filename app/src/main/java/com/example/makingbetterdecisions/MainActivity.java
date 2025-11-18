@@ -37,27 +37,24 @@ public class MainActivity extends AppCompatActivity {
         useCasesNavHost = (NavHostFragment) fragmentManager.findFragmentById(R.id.usecases_fragment_container);
         accountNavHost = (NavHostFragment) fragmentManager.findFragmentById(R.id.account_fragment_container);
 
-        activeFragment = homeNavHost; // start with home
+        activeFragment = homeNavHost;
+        showFragment(activeFragment);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId(); // get the int ID from menu
+            int id = item.getItemId();
 
             if (id == R.id.navigation_home) {
-                // show the home fragment
                 showFragment(homeNavHost);
             } else if (id == R.id.navigation_info) {
-                // show the search fragment
                 showFragment(infoNavHost);
             } else if (id == R.id.navigation_usecases) {
-                // show the search fragment
                 showFragment(useCasesNavHost);
             } else if (id == R.id.navigation_account) {
-                // show the account fragment
                 showFragment(accountNavHost);
             }
 
-            return true; // indicate the click was handled
+            return true;
         });
     }
 
