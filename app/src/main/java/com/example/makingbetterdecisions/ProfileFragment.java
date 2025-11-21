@@ -2,11 +2,27 @@ package com.example.makingbetterdecisions;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.makingbetterdecisions.model.User;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +39,9 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FirebaseAuth auth;
+    private FirebaseDatabase database;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -53,6 +72,8 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
     }
 
     @Override
@@ -60,5 +81,82 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        Button store = view.findViewById(R.id.store);
+        Button retrieve = view.findViewById(R.id.retrieve);
+        EditText entry1 = view.findViewById(R.id.entry1);
+        EditText entry2 = view.findViewById(R.id.entry2);
+        TextView tv = view.findViewById(R.id.tvTV);
+
+        store.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = auth.getCurrentUser().getUid();
+                DatabaseReference userRef = database.getReference("users").child(uid);
+
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User user = snapshot.getValue(User.class);
+                        if(user != null) {
+                            ArrayList<String> responses = user.getResponses();
+                            if(responses == null) {
+                                responses = new ArrayList<>();
+                            }
+                            responses.add(entry1.getText().toString().trim());
+                            responses.add(entry2.getText().toString().trim());
+                            user.setResponses(responses);
+
+                            userRef.setValue(user);
+                        }
+                        else {
+                            Toast.makeText(getContext(), "User is NULL!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
+        retrieve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = auth.getCurrentUser().getUid();
+                DatabaseReference userRef = database.getReference("users").child(uid);
+
+                userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User user = snapshot.getValue(User.class);
+                        if(user != null) {
+                            ArrayList<String> responses = user.getResponses();
+                            if(responses == null) {
+                                Toast.makeText(getContext(), "Ermmm no data", Toast.LENGTH_SHORT).show();
+                            }
+                            else {
+                                String gotText = "";
+                                for(int i = 0; i < responses.size(); i++) {
+                                    gotText = gotText.concat(responses.get(i));
+                                }
+                                tv.setText(gotText);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        });
     }
 }

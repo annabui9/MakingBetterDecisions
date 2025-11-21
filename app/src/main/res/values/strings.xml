@@ -13,5 +13,8 @@
     <string name="password">Password</string>
     <string name="sign_up">Sign Up</string>
     <string name="login1">Login</string>
+    <string name="sign_up1">Sign Up</string>
+    <string name="password1">Password</string>
+    <string name="email">Email</string>
 </resources>
 
