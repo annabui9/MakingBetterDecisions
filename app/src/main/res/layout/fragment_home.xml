@@ -36,7 +36,7 @@
         android:id="@+id/animatedOrb"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:background="@drawable/orb_gradient"
+        android:src="@drawable/orb_gradient"
         android:alpha="0.7"
         app:layout_constraintTop_toBottomOf="@id/logoImage"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Courtesy credit -->
+    <Button
+        android:id="@+id/enterButton"
+        android:layout_width="220dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/enter_button_bg"
+        android:text="Enter"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/courtesyText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/glowOrb" />
+
     <TextView
         android:id="@+id/courtesyText"
         android:layout_width="wrap_content"
