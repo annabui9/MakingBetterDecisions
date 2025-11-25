@@ -16,5 +16,7 @@
     <string name="sign_up1">Sign Up</string>
     <string name="password1">Password</string>
     <string name="email">Email</string>
+    <string name="use_case_title">Use Case Title</string>
+    <string name="use_case_description_goes_here">Use case description goes here</string>
 </resources>
 
