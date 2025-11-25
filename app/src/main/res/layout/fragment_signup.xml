@@ -19,7 +19,7 @@
             android:layout_marginTop="195dp"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/email"
+            android:hint="@string/email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
