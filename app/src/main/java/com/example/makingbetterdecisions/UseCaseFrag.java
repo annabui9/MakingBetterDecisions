@@ -76,3 +76,4 @@ public class UseCaseFrag extends Fragment {
         return view;
     }
 }
+

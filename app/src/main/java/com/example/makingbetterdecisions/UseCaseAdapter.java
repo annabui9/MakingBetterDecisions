@@ -64,7 +64,7 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
         holder.buttonDetails.setOnClickListener(v -> {
             Fragment questionFragment = QuestionFragment.newInstance(position, new ArrayList<>(useCases));
             fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, questionFragment)
+                    .replace(R.id.question_fragment_container, questionFragment)
                     .addToBackStack(null)
                     .commit();
         });

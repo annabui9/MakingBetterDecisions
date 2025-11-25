@@ -18,7 +18,7 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Use Case Title"
+            android:text="@string/use_case_title"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
