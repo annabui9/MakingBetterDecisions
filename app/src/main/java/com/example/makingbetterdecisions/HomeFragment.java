@@ -8,27 +8,31 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class HomeFragment extends Fragment {
 
-    public HomeFragment() {
-        // Required empty public constructor
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-        // Find the orb view
         ImageView orb = view.findViewById(R.id.animatedOrb);
 
-        // Load and start the pulse animation
-        Animation pulse = AnimationUtils.loadAnimation(getContext(), R.anim.pulse);
-        orb.startAnimation(pulse);
+        // Load animations
+        Animation pulse = AnimationUtils.loadAnimation(requireContext(), R.anim.pulse);
+        Animation rotate = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_orb);
 
-        return view;
+        // Combine animations
+        orb.startAnimation(pulse);
+        orb.startAnimation(rotate);
     }
 }
+
 
