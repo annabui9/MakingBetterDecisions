@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "189264741000",
+    "firebase_url": "https://makingbetterdecisionsbelmont-default-rtdb.firebaseio.com",
+    "project_id": "makingbetterdecisionsbelmont",
+    "storage_bucket": "makingbetterdecisionsbelmont.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189264741000:android:28d93d7ff9f81be4f8953d",
+        "android_client_info": {
+          "package_name": "com.example.makingbetterdecisions"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJWEM1sn-V8vj2QUH7J2R-XEzx39uKGnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
