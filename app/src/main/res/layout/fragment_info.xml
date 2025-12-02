@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp">
+
         <TextView
             android:id="@+id/thankYouTV"
             android:layout_width="match_parent"
@@ -19,6 +20,7 @@
             android:text="Thank you to Santa Clara Markkula Center for Applied Ethics for the use of\n'A Framework For Ethical Decision Making'."
             android:textSize="15sp"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/howToTV"
             android:layout_width="match_parent"
@@ -52,4 +54,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

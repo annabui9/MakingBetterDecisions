@@ -34,12 +34,16 @@ public class InfoFragment extends Fragment {
         List<Cell> howToCells = CellData.getHowToCells();
         howToAdapter = new CellAdapter(howToCells);
         howToRecyclerView.setAdapter(howToAdapter);
+        howToRecyclerView.setNestedScrollingEnabled(false);
+
 
         lensRecyclerView = view.findViewById(R.id.lensRecyclerView);
         lensRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         List<Cell> lensCells = CellData.getLensCells();
         lensAdapter = new CellAdapter(lensCells);
         lensRecyclerView.setAdapter(lensAdapter);
+        lensRecyclerView.setNestedScrollingEnabled(false);
+
 
 
 
