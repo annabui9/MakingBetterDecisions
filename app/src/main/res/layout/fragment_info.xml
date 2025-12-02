@@ -1,57 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fillViewport="true"
+    android:background="@drawable/home_background_gradient"
     tools:context=".InfoFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="20dp">
 
+        <!-- THANK YOU TEXT -->
         <TextView
             android:id="@+id/thankYouTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="Thank you to Santa Clara Markkula Center for Applied Ethics for the use of\n'A Framework For Ethical Decision Making'."
+            android:text="Thank you to Santa Clara Markkula Center for Applied Ethics for the use of 'A Framework For Ethical Decision Making'."
             android:textSize="15sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/logo_font"
+            android:textColor="#FFFFFF"
+            android:alpha="0.85"
+            android:padding="8dp" />
 
+        <!-- HOW TO HEADER -->
         <TextView
             android:id="@+id/howToTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
             android:text="HOW TO"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/logo_font"
+            android:textColor="#FFFFFF"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp"
+            android:alpha="0.95" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/howToRecyclerView"
+        <!-- HOW TO CARD -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
+            android:background="@drawable/info_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/howToRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/lensTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:padding="8dp"
             android:text="LENSES"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/logo_font"
+            android:textColor="#FFFFFF"
+            android:paddingTop="10dp"
+            android:paddingBottom="8dp"
+            android:alpha="0.95" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lensRecyclerView"
+        <!-- LENSES CARD -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
+            android:background="@drawable/info_card_bg"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lensRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false" />
+        </LinearLayout>
 
     </LinearLayout>
 
-</androidx.core.widget.NestedScrollView>
+</ScrollView>

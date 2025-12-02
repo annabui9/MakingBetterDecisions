@@ -1,18 +1,31 @@
 package com.example.makingbetterdecisions;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.makingbetterdecisions.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +48,7 @@ public class LoginFragment extends Fragment {
     Button loginButton;
     FirebaseAuth auth;
     FirebaseDatabase database;
+    String email, password;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -67,7 +81,10 @@ public class LoginFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        email = "empty";
+        password = "empty";
     }
 
     @Override
@@ -87,7 +104,57 @@ public class LoginFragment extends Fragment {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_loginFragment_to_signUpFragment);
+            }
+        });
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText userField = view.findViewById(R.id.loginUsername);
+                email = userField.getText().toString().trim();
+                EditText passField = view.findViewById(R.id.loginPassword);
+                password = passField.getText().toString().trim();
+
+                auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener
+                                (new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                        if (task.isSuccessful()) {
+
+                                            DatabaseReference usersRef = database.getReference("users");
+                                            usersRef.orderByChild("email")
+                                                    .equalTo(email).limitToFirst(1)
+                                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            User current = snapshot.getChildren().iterator().next().getValue(User.class);
+
+                                                            Bundle bundle = new Bundle();
+                                                            bundle.putString(User.N_KEY, email);
+                                                            NavController navController = Navigation.findNavController(v);
+                                                            navController.navigate(R.id.action_loginFragment_to_profileFragment, bundle);
+
+                                                        }
+
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
+
+
+
+                                        }
+                                        else {
+                                            Exception e = task.getException();
+                                            Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                        
+                                    }
+                                });
             }
         });
 

@@ -1,23 +1,25 @@
 package com.example.makingbetterdecisions.model;
 
+import java.util.ArrayList;
+
 public class User {
     public static final String N_KEY = "EMAILV";
-    public static final String DOB_KEY = "DOBV";
     private String email;
-    private String dob;
+    private ArrayList<String> responses;
+
+    public String getEmail() {
+        return email;
+    }
 
     public void setEmail(String email) {
         this.email = email;
     }
-    public void setDob(String dob) {
-        this.dob = dob;
+
+    public void setResponses(ArrayList<String> responses) {
+        this.responses = responses;
     }
 
-    public String getDob() {
-        return dob;
-    }
-
-    public String getEmail() {
-        return email;
+    public ArrayList<String> getResponses() {
+        return responses;
     }
 }

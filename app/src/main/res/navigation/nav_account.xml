@@ -6,12 +6,27 @@
         <fragment
             android:id="@+id/loginFragment"
             android:name="com.example.makingbetterdecisions.LoginFragment"
-            android:label="Login"/>
+            android:label="Login"
+            >
+            <action
+                android:id="@+id/action_loginFragment_to_signUpFragment"
+                app:destination="@id/signupFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
+        </fragment>
 
         <fragment
             android:id="@+id/signupFragment"
             android:name="com.example.makingbetterdecisions.SignupFragment"
-            android:label="Sign Up" />
+            android:label="Sign Up" >
+            <action
+                android:id="@+id/action_signupFragment_to_loginFragment"
+                app:destination="@id/loginFragment" />
+            <action
+                android:id="@+id/action_signupFragment_to_profileFragment"
+                app:destination="@id/profileFragment" />
+        </fragment>
 
         <fragment
             android:id="@+id/profileFragment"
