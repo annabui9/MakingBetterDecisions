@@ -1,0 +1,22 @@
+{
+  "project_info": {
+    "project_number": "0",
+    "project_id": "disabled"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "0:0:android:0",
+        "android_client_info": {
+          "package_name": "com.example.makingbetterdecisions"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "FAKE_KEY_FOR_LOCAL_BUILD_ONLY"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}
