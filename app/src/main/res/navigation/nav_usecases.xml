@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/navigation_usecases"
-        android:name="com.example.makingbetterdecisions.UseCasesFragment"
+        android:name="com.example.makingbetterdecisions.UseCaseFrag"
         android:label="Use"
         />
 
