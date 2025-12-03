@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 public class InfoFragment extends Fragment {
@@ -48,6 +51,8 @@ public class InfoFragment extends Fragment {
         lensAdapter = new CellAdapter(lensCells);
         lensRecyclerView.setAdapter(lensAdapter);
         lensRecyclerView.setNestedScrollingEnabled(false);
+
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
 
         return view;
