@@ -1,11 +1,13 @@
 package com.example.makingbetterdecisions.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
     public static final String N_KEY = "EMAILV";
     private String email;
     private ArrayList<String> responses;
+    private HashMap<String, String> answers;
 
     public String getEmail() {
         return email;
@@ -21,5 +23,12 @@ public class User {
 
     public ArrayList<String> getResponses() {
         return responses;
+    }
+    public HashMap<String, String> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(HashMap<String, String> answers) {
+        this.answers = answers;
     }
 }
