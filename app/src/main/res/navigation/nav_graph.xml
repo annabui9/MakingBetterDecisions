@@ -24,5 +24,11 @@
         android:id="@+id/navigation_account"
         android:name="com.example.makingbetterdecisions.AccountFragment"
         android:label="Account"/>
+    <fragment
+        android:id="@+id/navigation_question"
+        android:name="com.example.makingbetterdecisions.QuestionFragment"
+        android:label="Question"
+        />
+
 
 </navigation>

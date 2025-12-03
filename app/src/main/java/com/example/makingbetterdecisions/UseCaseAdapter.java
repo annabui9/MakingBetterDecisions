@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -62,12 +64,17 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
 
         // View Details
         holder.buttonDetails.setOnClickListener(v -> {
-            Fragment questionFragment = QuestionFragment.newInstance(position, new ArrayList<>(useCases));
-            fragmentManager.beginTransaction()
-                    .replace(R.id.question_fragment_container, questionFragment)
-                    .addToBackStack(null)
-                    .commit();
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_use_to_question);
         });
+//        holder.buttonDetails.setOnClickListener(v -> {
+//            Fragment questionFragment = QuestionFragment.newInstance(position, new ArrayList<>(useCases));
+//            fragmentManager.beginTransaction()
+//                    .replace(R.id.question_fragment_container, questionFragment)
+//                    .addToBackStack(null)
+//                    .commit();
+//
+//        });
     }
 
     @Override
