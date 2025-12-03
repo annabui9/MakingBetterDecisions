@@ -8,6 +8,15 @@
         android:id="@+id/navigation_usecases"
         android:name="com.example.makingbetterdecisions.UseCaseFrag"
         android:label="Use"
+        >
+        <action
+            android:id="@+id/action_use_to_question"
+            app:destination="@id/navigation_question" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_question"
+        android:name="com.example.makingbetterdecisions.QuestionFragment"
+        android:label="Question"
         />
 
 </navigation>

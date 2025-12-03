@@ -13,18 +13,26 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.print.PrintHelper;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class QuestionFragment extends Fragment {
-
+    private FirebaseAuth auth;
+    private FirebaseDatabase database;
     private List<UseCase> useCases;
     private int currentIndex;
     private HashMap<Question, String> answers = new HashMap<>();
@@ -47,6 +55,9 @@ public class QuestionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         if (getArguments() != null) {
             currentIndex = getArguments().getInt("index");
@@ -79,14 +90,11 @@ public class QuestionFragment extends Fragment {
         savePdfButton.setOnClickListener(v -> printCurrentUseCase());
 
         backButton.setOnClickListener(v -> {
-            saveAnswers();
-            if (currentIndex > 0) {
-                currentIndex--;
-                displayCurrentUseCase();
-            } else {
-                requireActivity().getSupportFragmentManager().popBackStack();
-            }
+            NavController navController = Navigation.findNavController(v);
+            navController.popBackStack(R.id.navigation_usecases, false);
         });
+
+
 
         nextButton.setOnClickListener(v -> {
             saveAnswers();
@@ -160,6 +168,38 @@ public class QuestionFragment extends Fragment {
 
             childIndex += 2; // skip question + input
         }
+
+        String uid = auth.getCurrentUser().getUid();
+        DatabaseReference userRef = database.getReference("users").child(uid);
+
+        // Convert HashMap<Question, String> to HashMap<String, String>
+        HashMap<String, String> firebaseAnswers = new HashMap<>();
+        for (Question q : answers.keySet()) {
+            String key = sanitizeFirebaseKey(q.getText()); // Use question text as key
+            String value = answers.get(q);
+            firebaseAnswers.put(key, value);
+        }
+
+        // Save to Firebase
+        userRef.child("answers").setValue(firebaseAnswers)
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(getContext(), "Answers saved!", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+    private String sanitizeFirebaseKey(String key) {
+        if (key == null) return "unknown";
+
+        // Replace invalid characters with underscores
+        return key.replace(".", "_")
+                .replace("/", "_")
+                .replace("#", "_")
+                .replace("$", "_")
+                .replace("[", "_")
+                .replace("]", "_")
+                .trim();
     }
 
     private void printCurrentUseCase() {

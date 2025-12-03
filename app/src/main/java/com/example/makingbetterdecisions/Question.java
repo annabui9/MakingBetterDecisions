@@ -18,8 +18,19 @@ public class Question implements Parcelable {
     }
 
     protected Question(Parcel in) {
+//        text = in.readString();
+//        options = in.createStringArrayList();
+//        isMultipleChoice = in.readByte() != 0;
         text = in.readString();
-        options = in.createStringArrayList();
+
+        // Read whether options exists
+        boolean hasOptions = in.readByte() != 0;
+        if (hasOptions) {
+            options = in.createStringArrayList();
+        } else {
+            options = null;
+        }
+
         isMultipleChoice = in.readByte() != 0;
     }
 
@@ -42,8 +53,19 @@ public class Question implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+//        dest.writeString(text);
+//        dest.writeStringList(options);
+//        dest.writeByte((byte) (isMultipleChoice ? 1 : 0));
         dest.writeString(text);
-        dest.writeStringList(options);
+
+        // Write whether options exists
+        if (options == null) {
+            dest.writeByte((byte) 0);  // 0 = no options
+        } else {
+            dest.writeByte((byte) 1);  // 1 = has options
+            dest.writeStringList(options);
+        }
+
         dest.writeByte((byte) (isMultipleChoice ? 1 : 0));
     }
 
