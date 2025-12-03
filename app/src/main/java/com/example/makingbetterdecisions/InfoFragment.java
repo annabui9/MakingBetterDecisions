@@ -38,21 +38,28 @@ public class InfoFragment extends Fragment {
         // HOW TO section
         howToRecyclerView = view.findViewById(R.id.howToRecyclerView);
         howToRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<Cell> howToCells = CellData.getHowToCells();
-        howToAdapter = new CellAdapter(howToCells);
-        howToRecyclerView.setAdapter(howToAdapter);
+        CellData.getHowToCells(new CellData.FirebaseCallback() {
+            @Override
+            public void onCallBack(List<Cell> howToCells) {
+                howToAdapter = new CellAdapter(howToCells);
+                howToRecyclerView.setAdapter(howToAdapter);
+            }
+        });
         howToRecyclerView.setNestedScrollingEnabled(false);
 
 
         // LENSES section
         lensRecyclerView = view.findViewById(R.id.lensRecyclerView);
         lensRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<Cell> lensCells = CellData.getLensCells();
-        lensAdapter = new CellAdapter(lensCells);
-        lensRecyclerView.setAdapter(lensAdapter);
+        CellData.getHowToCells(new CellData.FirebaseCallback() {
+            @Override
+            public void onCallBack(List<Cell> lensCells) {
+                lensAdapter = new CellAdapter(lensCells);
+                lensRecyclerView.setAdapter(lensAdapter);
+            }
+        });
         lensRecyclerView.setNestedScrollingEnabled(false);
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
 
         return view;
