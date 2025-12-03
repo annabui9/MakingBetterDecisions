@@ -17,6 +17,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.print.PrintHelper;
 
 import java.util.ArrayList;
@@ -79,14 +81,11 @@ public class QuestionFragment extends Fragment {
         savePdfButton.setOnClickListener(v -> printCurrentUseCase());
 
         backButton.setOnClickListener(v -> {
-            saveAnswers();
-            if (currentIndex > 0) {
-                currentIndex--;
-                displayCurrentUseCase();
-            } else {
-                requireActivity().getSupportFragmentManager().popBackStack();
-            }
+            NavController navController = Navigation.findNavController(v);
+            navController.popBackStack(R.id.navigation_usecases, false);
         });
+
+
 
         nextButton.setOnClickListener(v -> {
             saveAnswers();
