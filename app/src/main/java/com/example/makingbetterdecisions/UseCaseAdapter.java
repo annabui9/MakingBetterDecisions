@@ -1,5 +1,6 @@
 package com.example.makingbetterdecisions;
 
+import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
@@ -64,8 +65,26 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
 
         // View Details
         holder.buttonDetails.setOnClickListener(v -> {
+            android.util.Log.d("UseCaseAdapter", "=== BUTTON CLICKED ===");
+            android.util.Log.d("UseCaseAdapter", "Position: " + position);
+            android.util.Log.d("UseCaseAdapter", "useCases is null? " + (useCases == null));
+            android.util.Log.d("UseCaseAdapter", "useCases size: " + useCases.size());
+            android.util.Log.d("UseCaseAdapter", "UseCase title: " + useCases.get(position).getTitle());
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("index", position);
+            bundle.putParcelableArrayList("useCases", new ArrayList<>(useCases));
+
+            android.util.Log.d("UseCaseAdapter", "Bundle keys: " + bundle.keySet());
+            android.util.Log.d("UseCaseAdapter", "Bundle index: " + bundle.getInt("index"));
+
+            ArrayList<UseCase> test = bundle.getParcelableArrayList("useCases");
+            android.util.Log.d("UseCaseAdapter", "Bundle useCases retrieved size: " + (test != null ? test.size() : "NULL"));
+
             NavController navController = Navigation.findNavController(v);
-            navController.navigate(R.id.action_use_to_question);
+            navController.navigate(R.id.action_use_to_question, bundle);
+
+            android.util.Log.d("UseCaseAdapter", "Navigation executed");
         });
 //        holder.buttonDetails.setOnClickListener(v -> {
 //            Fragment questionFragment = QuestionFragment.newInstance(position, new ArrayList<>(useCases));
