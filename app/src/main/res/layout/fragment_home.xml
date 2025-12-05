@@ -62,7 +62,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/enter_button_bg"
         android:text="Enter"
-        android:textColor="#FFFFFF"
+        android:textColor="#0A1A2F"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/courtesyText"

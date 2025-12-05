@@ -26,7 +26,7 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
     private final FragmentManager fragmentManager;
 
     // Card colors
-    private final int[] colors = {0xFFE3F2FD, 0xFFFFF9C4, 0xFFC8E6C9, 0xFFFFCCBC};
+    private final int[] colors = {0xFFE6F0FF, 0xFFCCE2FF, 0xFFB3D4FF, 0xFF99C6FF};
 
     public UseCaseAdapter(FragmentManager fm, List<UseCase> useCases) {
         this.fragmentManager = fm;

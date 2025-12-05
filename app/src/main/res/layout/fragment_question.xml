@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:background="@drawable/home_background_gradient"
     android:fillViewport="true">
 
     <LinearLayout
@@ -19,7 +20,8 @@
             android:layout_marginBottom="8dp"
             android:text="@string/use_case_title"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
 
         <!-- Use Case Description -->
         <TextView
@@ -28,7 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/use_case_description_goes_here"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textColor="#DDEBFF" />
 
         <!-- Container for dynamic questions -->
         <LinearLayout
@@ -51,7 +54,11 @@
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Back" />
+                android:text="Back"
+                android:textColor="#0A1A2F"
+                android:background="@drawable/rounded_button_white"
+                android:backgroundTint="#FFFFFF"
+                android:foregroundTint="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonSubmit"
@@ -60,14 +67,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="Save" />
+                android:text="Save"
+                android:textColor="#0A1A2F"
+                android:background="@drawable/rounded_button_white"
+                android:backgroundTint="#FFFFFF"
+                android:foregroundTint="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonNext"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Next" />
+                android:text="Next"
+                android:textColor="#0A1A2F"
+                android:background="@drawable/rounded_button_white"
+                android:backgroundTint="#FFFFFF"
+                android:foregroundTint="#FFFFFF" />
 
             <Button
                 android:id="@+id/buttonSavePdf"
@@ -75,14 +90,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Save as PDF" />
+                android:text="Save as PDF"
+                android:textColor="#0A1A2F"
+                android:background="@drawable/rounded_button_white"
+                android:backgroundTint="#FFFFFF"
+                android:foregroundTint="#FFFFFF" />
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 
     </LinearLayout>
 </ScrollView>
+
 
 
 

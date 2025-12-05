@@ -1,9 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.MakingBetterDecisions" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryContainer">@android:color/transparent</item>
+        <item name="colorSecondary">@android:color/transparent</item>
+        <item name="colorSecondaryContainer">@android:color/transparent</item>
+
+        <item name="materialButtonStyle">@style/GlobalWhiteButton</item>
+
     </style>
 
     <style name="Theme.MakingBetterDecisions" parent="Base.Theme.MakingBetterDecisions" />
+
+    <style name="GlobalWhiteButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@android:color/white</item>
+        <item name="android:textColor">@color/navy_text</item>
+        <item name="iconTint">@color/navy_text</item>
+        <item name="rippleColor">@android:color/darker_gray</item>
+        <item name="cornerRadius">20dp</item>
+    </style>
+
 </resources>

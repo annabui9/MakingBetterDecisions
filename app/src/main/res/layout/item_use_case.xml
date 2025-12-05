@@ -2,53 +2,89 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp"
-    android:padding="16dp">
+    android:layout_margin="12dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:id="@+id/cardContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="18dp">
 
+        <!-- Title -->
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/use_case_title"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textColor="#0A1A2F"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textAppearance="@null"
+            android:fontFamily="@font/logo_font" />
 
+        <!-- Industry -->
         <TextView
             android:id="@+id/textIndustry"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Industry: Technology"
-            android:layout_marginTop="4dp"/>
+            android:textColor="#0A1A2F"
+            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:textAppearance="@null"
+            android:fontFamily="@font/logo_font" />
 
+        <!-- Scenario -->
         <TextView
             android:id="@+id/textScenario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Scenario: Short scenario description"
-            android:layout_marginTop="2dp"/>
+            android:textColor="#0A1A2F"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"
+            android:textAppearance="@null"
+            android:fontFamily="@font/logo_font" />
 
+        <!-- Description -->
         <TextView
             android:id="@+id/textDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Description: Short description"
-            android:layout_marginTop="2dp"/>
+            android:textColor="#0A1A2F"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"
+            android:textAppearance="@null"
+            android:fontFamily="@font/logo_font" />
 
+        <!-- EXPLORE BUTTON WITH WORKING GRADIENT -->
         <Button
             android:id="@+id/buttonDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Explore"
-            android:layout_marginTop="8dp"/>
+            android:textColor="#FFFFFF"
+            android:fontFamily="@font/logo_font"
+            android:background="@drawable/button_gradient_blue"
+            android:backgroundTint="@null"
+            app:backgroundTint="@null"
+            app:backgroundTintMode="multiply"
+            android:stateListAnimator="@null"
+            android:layout_marginTop="12dp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
     </LinearLayout>
+
 </com.google.android.material.card.MaterialCardView>
+
+
+
 

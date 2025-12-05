@@ -5,6 +5,7 @@
     android:padding="16dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/home_background_gradient"
     tools:context=".UseCaseFrag">
 
     <TextView
@@ -12,6 +13,8 @@
         android:text="Ethical Dilemmas"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/logo_font"
         android:layout_marginBottom="8dp"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
