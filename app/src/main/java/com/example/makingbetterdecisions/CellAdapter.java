@@ -42,8 +42,12 @@ public class CellAdapter extends RecyclerView.Adapter<CellAdapter.CellViewHolder
     @Override
     public void onBindViewHolder(@NonNull CellViewHolder holder, int position) {
         Cell cell = cellList.get(position);
+
         holder.titleTextView.setText(cell.getTitle());
         holder.detailsTextView.setText(cell.getDetails());
+
+        holder.titleTextView.setTextColor(0xFFFFFFFF);
+        holder.detailsTextView.setTextColor(0xFFFFFFFF);
 
         holder.layoutDetails.setVisibility(cell.isExpanded() ? View.VISIBLE : View.GONE);
 
@@ -52,6 +56,7 @@ public class CellAdapter extends RecyclerView.Adapter<CellAdapter.CellViewHolder
             notifyItemChanged(position);
         });
     }
+
 
     @Override
     public int getItemCount() {
