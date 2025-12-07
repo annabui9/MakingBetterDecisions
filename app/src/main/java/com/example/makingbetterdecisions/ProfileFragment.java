@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -132,6 +133,8 @@ public class ProfileFragment extends Fragment {
                 String uid = auth.getCurrentUser().getUid();
                 DatabaseReference userRef = database.getReference("users").child(uid);
 
+                displaySavedAnswers();
+
                 userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -156,6 +159,72 @@ public class ProfileFragment extends Fragment {
 
                     }
                 });
+            }
+        });
+    }
+    private void displaySavedAnswers() {
+        String uid = auth.getCurrentUser().getUid();
+        DatabaseReference answersRef = database.getReference("users").child(uid).child("Apple and it's left-handed Users_answers");
+
+        answersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                LinearLayout container = getView().findViewById(R.id.answersContainer);
+                container.removeAllViews(); // Clear existing views
+
+                if (!snapshot.exists()) {
+                    TextView noData = new TextView(getContext());
+                    noData.setText("No saved answers yet");
+                    noData.setTextSize(16);
+                    container.addView(noData);
+                    return;
+                }
+
+                // Loop through each use case
+                for (DataSnapshot useCaseSnapshot : snapshot.getChildren()) {
+                    String useCaseTitle = useCaseSnapshot.getKey();
+
+                    // Use Case Title
+                    TextView titleView = new TextView(getContext());
+                    titleView.setText(useCaseTitle);
+                    titleView.setTextSize(20);
+                    titleView.setTypeface(null, android.graphics.Typeface.BOLD);
+                    titleView.setPadding(0, 30, 0, 15);
+                    container.addView(titleView);
+
+                    // Loop through questions and answers
+                    for (DataSnapshot qaSnapshot : useCaseSnapshot.getChildren()) {
+                        String question = qaSnapshot.getKey();
+                        String answer = qaSnapshot.getValue(String.class);
+
+                        // Question
+                        TextView questionView = new TextView(getContext());
+                        questionView.setText("Q: " + question);
+                        questionView.setTextSize(16);
+                        questionView.setTypeface(null, android.graphics.Typeface.BOLD);
+                        questionView.setPadding(0, 10, 0, 5);
+                        container.addView(questionView);
+
+                        // Answer
+                        TextView answerView = new TextView(getContext());
+                        answerView.setText("A: " + answer);
+                        answerView.setTextSize(14);
+                        answerView.setPadding(20, 0, 0, 15);
+                        container.addView(answerView);
+                    }
+
+                    // Divider line
+                    View divider = new View(getContext());
+                    divider.setLayoutParams(new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT, 2));
+                    divider.setBackgroundColor(0xFFCCCCCC);
+                    container.addView(divider);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(), "Error loading answers", Toast.LENGTH_SHORT).show();
             }
         });
     }

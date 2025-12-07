@@ -181,7 +181,8 @@ public class QuestionFragment extends Fragment {
         }
 
         // Save to Firebase
-        userRef.child("answers").setValue(firebaseAnswers)
+        String caseTitle = titleText.getText().toString() + "_answers";
+        userRef.child(caseTitle).setValue(firebaseAnswers)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(getContext(), "Answers saved!", Toast.LENGTH_SHORT).show();
                 })
