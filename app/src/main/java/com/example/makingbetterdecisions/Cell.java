@@ -6,6 +6,9 @@ public class Cell{
     private String details;
     private boolean expanded;
 
+    public Cell(){
+
+    }
     public Cell(String title, String details){
         this.title = title;
         this.details = details;
