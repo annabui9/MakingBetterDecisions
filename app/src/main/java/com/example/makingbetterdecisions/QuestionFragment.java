@@ -121,6 +121,8 @@ public class QuestionFragment extends Fragment {
             qText.setText(q.getText());
             qText.setTextSize(16);
             qText.setPadding(0, 20, 0, 10);
+            qText.setTextColor(0xFFFFFFFF);
+
             questionContainer.addView(qText);
 
             if (q.isMultipleChoice()) {
@@ -138,10 +140,18 @@ public class QuestionFragment extends Fragment {
             } else {
                 EditText answer = new EditText(getContext());
                 answer.setHint("Type your response...");
+                answer.setHintTextColor(0xFFFFFFFF);
+                answer.setTextColor(0xFFFFFFFF);
+                answer.setHighlightColor(0x55FFFFFF);
+                answer.setBackground(null);
+                answer.setPadding(20, 20, 20, 20);
+
                 if (answers.containsKey(q)) {
                     answer.setText(answers.get(q));
                 }
+
                 questionContainer.addView(answer);
+
             }
         }
     }

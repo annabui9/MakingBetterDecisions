@@ -8,6 +8,7 @@
     android:background="@drawable/home_background_gradient"
     tools:context=".UseCaseFrag">
 
+    <!-- TITLE -->
     <TextView
         android:id="@+id/useCasesTitle"
         android:text="Ethical Dilemmas"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
 
+    <!-- USE CASE LIST -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewUseCases"
         android:layout_width="match_parent"
