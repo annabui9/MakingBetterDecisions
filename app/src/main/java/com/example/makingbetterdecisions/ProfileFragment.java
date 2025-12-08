@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,11 +91,19 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         Button store = view.findViewById(R.id.store);
+        Button changePassword = view.findViewById(R.id.changePassword);
         Button retrieve = view.findViewById(R.id.retrieve);
         EditText entry1 = view.findViewById(R.id.entry1);
         EditText entry2 = view.findViewById(R.id.entry2);
         TextView tv = view.findViewById(R.id.tvTV);
 
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_profile_to_changePassword);
+            }
+        });
         store.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
