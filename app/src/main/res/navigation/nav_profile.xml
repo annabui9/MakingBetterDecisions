@@ -8,17 +8,17 @@
         android:id="@+id/profileFragment"
         android:name="com.example.makingbetterdecisions.ProfileFragment"
         android:label="Profile" >
-        <action
-            android:id="@+id/action_profile_to_changePassword"
-            app:destination="@id/changePasswordsFragment" />
+<!--        <action-->
+<!--            android:id="@+id/action_profile_to_changePassword"-->
+<!--            app:destination="@id/changePasswordsFragment" />-->
         <action
             android:id="@+id/action_profile_to_viewAnswers"
             app:destination="@id/viewAnswersFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/changePasswordsFragment"
-        android:name="com.example.makingbetterdecisions.ChangePasswordsFragment"
-        android:label="Change Password" />
+<!--    <fragment-->
+<!--        android:id="@+id/changePasswordsFragment"-->
+<!--        android:name="com.example.makingbetterdecisions.ChangePasswordsFragment"-->
+<!--        android:label="Change Password" />-->
     <fragment
         android:id="@+id/viewAnswersFragment"
         android:name="com.example.makingbetterdecisions.ViewAnswersFragment"

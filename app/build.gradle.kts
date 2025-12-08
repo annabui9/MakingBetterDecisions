@@ -55,6 +55,7 @@ dependencies {
 
     // ⭐ ADD THIS — LOTTIE ANIMATION LIBRARY
     implementation("com.airbnb.android:lottie:6.0.0")
+    implementation(libs.androidx.cardview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

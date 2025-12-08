@@ -16,10 +16,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth auth;
+    private FirebaseDatabase database;
 
     @Nullable
     @Override
@@ -42,9 +44,10 @@ public class ProfileFragment extends Fragment {
             emailText.setText(auth.getCurrentUser().getEmail());
         }
 
-        previousAnswers.setOnClickListener(v ->
-                Toast.makeText(getContext(), "previous answers coming soon", Toast.LENGTH_SHORT).show()
-        );
+        previousAnswers.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(v);
+            navController.navigate(R.id.action_profile_to_viewAnswers);
+        });
 
         changePassword.setOnClickListener(v -> {
             Intent intent = new Intent(requireActivity(), ChangePasswordActivity.class);
