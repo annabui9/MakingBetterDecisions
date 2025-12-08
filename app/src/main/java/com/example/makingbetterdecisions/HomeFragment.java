@@ -27,7 +27,7 @@ public class HomeFragment extends Fragment {
 
         ImageView orb = view.findViewById(R.id.animatedOrb);
 
-        //enter button animations
+        // Enter button animations
         Button enterButton = view.findViewById(R.id.enterButton);
         Animation glow = AnimationUtils.loadAnimation(requireContext(), R.anim.button_glow);
         enterButton.startAnimation(glow);
@@ -36,10 +36,14 @@ public class HomeFragment extends Fragment {
             Animation press = AnimationUtils.loadAnimation(requireContext(), R.anim.button_press);
             v.startAnimation(press);
 
-            // add navigation for the button here!
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.info_fragment_container, new InfoFragment())
+                    .addToBackStack(null)
+                    .commit();
         });
 
-
+        // ORB animations
         orb.post(() -> {
             Animation pulse = AnimationUtils.loadAnimation(requireContext(), R.anim.pulse);
             Animation rotate = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_orb);
@@ -52,6 +56,7 @@ public class HomeFragment extends Fragment {
         });
     }
 }
+
 
 
 

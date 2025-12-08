@@ -19,9 +19,7 @@ public class InfoFragment extends Fragment {
     private CellAdapter howToAdapter;
     private CellAdapter lensAdapter;
 
-    public InfoFragment() {
-        // Required empty public constructor
-    }
+    public InfoFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,16 +33,29 @@ public class InfoFragment extends Fragment {
         // HOW TO section
         howToRecyclerView = view.findViewById(R.id.howToRecyclerView);
         howToRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<Cell> howToCells = CellData.getHowToCells();
-        howToAdapter = new CellAdapter(howToCells);
-        howToRecyclerView.setAdapter(howToAdapter);
 
-        // LENSES section
+        CellData.getHowToCells(new CellData.FirebaseCallback() {
+            @Override
+            public void onCallBack(List<Cell> howToCells) {
+                howToAdapter = new CellAdapter(howToCells);
+                howToRecyclerView.setAdapter(howToAdapter);
+            }
+        });
+        howToRecyclerView.setNestedScrollingEnabled(false);
+
+
+        // LENSES section (THIS WAS WRONG BEFORE)
         lensRecyclerView = view.findViewById(R.id.lensRecyclerView);
         lensRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<Cell> lensCells = CellData.getLensCells();
-        lensAdapter = new CellAdapter(lensCells);
-        lensRecyclerView.setAdapter(lensAdapter);
+
+        CellData.getLensCells(new CellData.FirebaseCallback() {   // ← FIXED HERE
+            @Override
+            public void onCallBack(List<Cell> lensCells) {
+                lensAdapter = new CellAdapter(lensCells);
+                lensRecyclerView.setAdapter(lensAdapter);
+            }
+        });
+        lensRecyclerView.setNestedScrollingEnabled(false);
 
         return view;
     }
