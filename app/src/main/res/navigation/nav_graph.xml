@@ -1,49 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:startDestination="@id/navigation_home"
-    android:id="@+id/nav_graph">
-
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.makingbetterdecisions.HomeFragment"
-        android:label="Info"
-        />
+        android:label="Info" />
+
     <fragment
         android:id="@+id/navigation_info"
         android:name="com.example.makingbetterdecisions.InfoFragment"
-        android:label="Info"
-        />
+        android:label="Info" />
+
     <fragment
         android:id="@+id/navigation_usecases"
         android:name="com.example.makingbetterdecisions.UseCasesFragment"
         android:label="Use">
 
-        <!-- Add this action to navigate to QuestionFragment -->
         <action
             android:id="@+id/action_use_to_question"
             app:destination="@id/navigation_question" />
     </fragment>
+
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.example.makingbetterdecisions.AccountFragment"
-        android:label="Account"/>
+        android:label="Account" />
+
     <fragment
         android:id="@+id/navigation_question"
         android:name="com.example.makingbetterdecisions.QuestionFragment"
         android:label="Question">
 
-        <!-- Declare the arguments this fragment expects -->
         <argument
             android:name="index"
             app:argType="integer"
             android:defaultValue="0" />
+
         <argument
             android:name="useCases"
             app:argType="com.example.makingbetterdecisions.UseCase[]"
             app:nullable="false" />
     </fragment>
 
+    <fragment
+        android:id="@+id/navigation_change_password"
+        android:name="com.example.makingbetterdecisions.ChangePasswordsFragment"
+        android:label="Change Password" />
+
+    <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.example.makingbetterdecisions.LoginFragment"
+        android:label="Login" />
+
+    <include app:graph="@navigation/nav_profile" />
 
 </navigation>
+

@@ -10,9 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.List;
 
 public class InfoFragment extends Fragment {
@@ -22,9 +19,7 @@ public class InfoFragment extends Fragment {
     private CellAdapter howToAdapter;
     private CellAdapter lensAdapter;
 
-    public InfoFragment() {
-        // Required empty public constructor
-    }
+    public InfoFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +33,7 @@ public class InfoFragment extends Fragment {
         // HOW TO section
         howToRecyclerView = view.findViewById(R.id.howToRecyclerView);
         howToRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
         CellData.getHowToCells(new CellData.FirebaseCallback() {
             @Override
             public void onCallBack(List<Cell> howToCells) {
@@ -48,10 +44,11 @@ public class InfoFragment extends Fragment {
         howToRecyclerView.setNestedScrollingEnabled(false);
 
 
-        // LENSES section
+        // LENSES section (THIS WAS WRONG BEFORE)
         lensRecyclerView = view.findViewById(R.id.lensRecyclerView);
         lensRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        CellData.getHowToCells(new CellData.FirebaseCallback() {
+
+        CellData.getLensCells(new CellData.FirebaseCallback() {   // ← FIXED HERE
             @Override
             public void onCallBack(List<Cell> lensCells) {
                 lensAdapter = new CellAdapter(lensCells);
@@ -59,8 +56,6 @@ public class InfoFragment extends Fragment {
             }
         });
         lensRecyclerView.setNestedScrollingEnabled(false);
-
-
 
         return view;
     }
