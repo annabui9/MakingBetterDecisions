@@ -20,5 +20,10 @@
     <string name="use_case_description_goes_here">Use case description goes here</string>
     <string name="tvemail">Email:</string>
     <string name="displayemail">email</string>
+    <string name="change_password">Change Password</string>
+    <string name="profile">Profile</string>
+    <string name="use_case_1">Use Case 1</string>
+    <string name="use_case_2">Use Case 2</string>
+    <string name="use_case_3">Use Case 3</string>
 </resources>
 
