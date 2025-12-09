@@ -90,7 +90,7 @@ public class SignupFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         signupButton = view.findViewById(R.id.signupButton2);
-
+        backButton = view.findViewById(R.id.back);
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +131,10 @@ public class SignupFragment extends Fragment {
                         });
 
             }
+        });
+        backButton.setOnClickListener(v -> {
+            NavController navController = Navigation.findNavController(v);
+            navController.popBackStack();
         });
     }
 

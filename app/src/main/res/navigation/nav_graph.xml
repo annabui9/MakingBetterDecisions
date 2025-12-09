@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/navigation_change_password"
-        android:name="com.example.makingbetterdecisions.ChangePasswordsFragment"
+        android:name="com.example.makingbetterdecisions.ChangePasswordFragment"
         android:label="Change Password" />
 
     <fragment
