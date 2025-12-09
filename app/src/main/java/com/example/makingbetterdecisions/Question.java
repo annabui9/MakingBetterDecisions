@@ -11,6 +11,11 @@ public class Question implements Parcelable {
     private List<String> options; // null if free response
     private boolean isMultipleChoice;
 
+    public Question() {
+        // REQUIRED empty constructor for Firebase
+    }
+
+
     public Question(String text, List<String> options, boolean isMultipleChoice) {
         this.text = text;
         this.options = options;

@@ -11,16 +11,19 @@ public class UseCase implements Parcelable {
     private String industry;
     private String scenario;
     private String details;
-    private List<Question> questions;
+    private String id;
+    private List<String> questionIds;
 
-    public UseCase(String title, String description, String industry, String scenario, String details, List<Question> questions) {
+    public UseCase() { }
+    public UseCase(String title, String description, String industry,
+                   String scenario, String details) {
         this.title = title;
         this.description = description;
         this.industry = industry;
         this.scenario = scenario;
         this.details = details;
-        this.questions = questions;
     }
+
 
     // Getters
     public String getTitle() { return title; }
@@ -28,7 +31,16 @@ public class UseCase implements Parcelable {
     public String getIndustry() { return industry; }
     public String getScenario() { return scenario; }
     public String getDetails() { return details; }
-    public List<Question> getQuestions() { return questions; }
+    public String getId() {
+        return id;
+    }
+    public List<String> getQuestionIds() {
+        return questionIds;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     // Parcelable implementation
     protected UseCase(Parcel in) {
@@ -37,8 +49,9 @@ public class UseCase implements Parcelable {
         industry = in.readString();
         scenario = in.readString();
         details = in.readString();
-        questions = in.createTypedArrayList(Question.CREATOR);
+        questionIds = in.createStringArrayList();
     }
+
 
     public static final Creator<UseCase> CREATOR = new Creator<UseCase>() {
         @Override
@@ -57,7 +70,8 @@ public class UseCase implements Parcelable {
         parcel.writeString(industry);
         parcel.writeString(scenario);
         parcel.writeString(details);
-        parcel.writeTypedList(questions);
+        parcel.writeStringList(questionIds);
     }
+
 }
 

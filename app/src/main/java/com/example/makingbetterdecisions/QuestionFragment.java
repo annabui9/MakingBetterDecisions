@@ -2,7 +2,6 @@ package com.example.makingbetterdecisions;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,8 +22,11 @@ import androidx.navigation.Navigation;
 import androidx.print.PrintHelper;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,24 +35,18 @@ import java.util.List;
 public class QuestionFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseDatabase database;
-    private List<UseCase> useCases;
-    private int currentIndex;
     private HashMap<Question, String> answers = new HashMap<>();
+    private String useCaseId;
+    private List<Question> questions = new ArrayList<>();
+
+    private TextView descriptionText;
 
     private TextView titleText;
     private LinearLayout questionContainer;
-    private Button submitButton, backButton, nextButton, savePdfButton;
+    private Button submitButton, backButton, savePdfButton;
 
     public QuestionFragment() { }
 
-    public static QuestionFragment newInstance(int index, ArrayList<UseCase> useCases) {
-        QuestionFragment fragment = new QuestionFragment();
-        Bundle args = new Bundle();
-        args.putInt("index", index);
-        args.putParcelableArrayList("useCases", useCases);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,16 +56,13 @@ public class QuestionFragment extends Fragment {
         database = FirebaseDatabase.getInstance();
 
         if (getArguments() != null) {
-            currentIndex = getArguments().getInt("index");
-            ArrayList<? extends Parcelable> parcelables = getArguments().getParcelableArrayList("useCases");
-            useCases = new ArrayList<>();
-            if (parcelables != null) {
-                for (Parcelable p : parcelables) {
-                    useCases.add((UseCase) p);
-                }
-            }
+            useCaseId = getArguments().getString("useCaseId");
+            loadUseCaseAndQuestions();
+
         }
+
     }
+
 
     @Nullable
     @Override
@@ -80,10 +73,10 @@ public class QuestionFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_question, container, false);
 
         titleText = view.findViewById(R.id.textQuestionTitle);
+        descriptionText = view.findViewById(R.id.textDescription);
         questionContainer = view.findViewById(R.id.questionContainer);
         submitButton = view.findViewById(R.id.buttonSubmit);
         backButton = view.findViewById(R.id.buttonBack);
-        nextButton = view.findViewById(R.id.buttonNext);
         savePdfButton = view.findViewById(R.id.buttonSavePdf);
 
         submitButton.setOnClickListener(v -> saveAnswers());
@@ -95,73 +88,13 @@ public class QuestionFragment extends Fragment {
         });
 
 
-
-        nextButton.setOnClickListener(v -> {
-            saveAnswers();
-            if (currentIndex < useCases.size() - 1) {
-                currentIndex++;
-                displayCurrentUseCase();
-            }
-        });
-
-        displayCurrentUseCase();
         return view;
     }
 
-    private void displayCurrentUseCase() {
-        questionContainer.removeAllViews();
-        UseCase current = useCases.get(currentIndex);
-
-        // Title at top
-        titleText.setText(current.getTitle());
-
-        // Questions only
-        for (Question q : current.getQuestions()) {
-            TextView qText = new TextView(getContext());
-            qText.setText(q.getText());
-            qText.setTextSize(16);
-            qText.setPadding(0, 20, 0, 10);
-            qText.setTextColor(0xFFFFFFFF);
-
-            questionContainer.addView(qText);
-
-            if (q.isMultipleChoice()) {
-                RadioGroup group = new RadioGroup(getContext());
-                for (String option : q.getOptions()) {
-                    RadioButton rb = new RadioButton(getContext());
-                    rb.setText(option);
-                    group.addView(rb);
-
-                    if (answers.containsKey(q) && answers.get(q).equals(option)) {
-                        rb.setChecked(true);
-                    }
-                }
-                questionContainer.addView(group);
-            } else {
-                EditText answer = new EditText(getContext());
-                answer.setHint("Type your response...");
-                answer.setHintTextColor(0xFFFFFFFF);
-                answer.setTextColor(0xFFFFFFFF);
-                answer.setHighlightColor(0x55FFFFFF);
-                answer.setBackground(null);
-                answer.setPadding(20, 20, 20, 20);
-
-                if (answers.containsKey(q)) {
-                    answer.setText(answers.get(q));
-                }
-
-                questionContainer.addView(answer);
-
-            }
-        }
-    }
 
     private void saveAnswers() {
-        UseCase current = useCases.get(currentIndex);
         int childIndex = 0;
-
-        // Skip question TextViews + inputs correctly
-        for (Question q : current.getQuestions()) {
+        for (Question q : questions) {
             View inputView = questionContainer.getChildAt(childIndex + 1);
 
             if (q.isMultipleChoice() && inputView instanceof RadioGroup) {
@@ -176,8 +109,11 @@ public class QuestionFragment extends Fragment {
                 answers.put(q, et.getText().toString());
             }
 
-            childIndex += 2; // skip question + input
+            childIndex += 2;
         }
+
+
+
 
         String uid = auth.getCurrentUser().getUid();
         DatabaseReference userRef = database.getReference("users").child(uid);
@@ -191,14 +127,16 @@ public class QuestionFragment extends Fragment {
         }
 
         // Save to Firebase
-        String caseTitle = titleText.getText().toString() + "_answers";
-        userRef.child(caseTitle).setValue(firebaseAnswers)
+        userRef.child("answers")
+                .child(useCaseId)
+                .setValue(firebaseAnswers)
                 .addOnSuccessListener(aVoid -> {
                     Toast.makeText(getContext(), "Answers saved!", Toast.LENGTH_SHORT).show();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
+
     }
     private String sanitizeFirebaseKey(String key) {
         if (key == null) return "unknown";
@@ -227,6 +165,78 @@ public class QuestionFragment extends Fragment {
 
         PrintHelper printHelper = new PrintHelper(getContext());
         printHelper.setScaleMode(PrintHelper.SCALE_MODE_FIT);
-        printHelper.printBitmap(useCases.get(currentIndex).getTitle(), bitmap);
+        printHelper.printBitmap("Use Case Answers", bitmap);
     }
+    private void loadUseCaseAndQuestions() {
+
+        FirebaseDatabase.getInstance()
+                .getReference("useCases")
+                .child(useCaseId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        UseCase uc = snapshot.getValue(UseCase.class);
+                        if (uc == null) return;
+
+                        titleText.setText(uc.getTitle());
+                        descriptionText.setText(uc.getDescription());
+                        loadQuestions(uc.getQuestionIds());
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) { }
+                });
+    }
+    private void loadQuestions(List<String> questionIds) {
+
+        FirebaseDatabase.getInstance()
+                .getReference("questions")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+
+                        questions.clear();
+                        questionContainer.removeAllViews();
+
+                        for (String id : questionIds) {
+                            Question q = snapshot.child(id).getValue(Question.class);
+                            if (q != null) {
+                                questions.add(q);
+                                renderQuestion(q);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) { }
+                });
+    }
+    private void renderQuestion(Question q) {
+        TextView qText = new TextView(getContext());
+        qText.setText(q.getText());
+        qText.setTextSize(16);
+        qText.setPadding(0, 20, 0, 10);
+        qText.setTextColor(0xFFFFFFFF);
+        questionContainer.addView(qText);
+
+        if (q.isMultipleChoice()) {
+            RadioGroup group = new RadioGroup(getContext());
+            for (String option : q.getOptions()) {
+                RadioButton rb = new RadioButton(getContext());
+                rb.setText(option);
+                group.addView(rb);
+            }
+            questionContainer.addView(group);
+        } else {
+            EditText answer = new EditText(getContext());
+            answer.setHint("Type your response...");
+            answer.setTextColor(0xFFFFFFFF);
+            answer.setHintTextColor(0xFFFFFFFF);
+            answer.setBackground(null);
+            questionContainer.addView(answer);
+        }
+    }
+
+
 }

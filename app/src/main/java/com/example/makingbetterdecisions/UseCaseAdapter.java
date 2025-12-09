@@ -60,6 +60,13 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
         ssScenario.setSpan(new UnderlineSpan(), 0, scenarioLabel.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.textScenario.setText(ssScenario);
 
+        // Description with underline
+        String descLabel = "Description";
+        String descValue = ": " + useCase.getDescription();
+        SpannableString ssDesc = new SpannableString(descLabel + descValue);
+        ssDesc.setSpan(new UnderlineSpan(), 0, descLabel.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.textDescription.setText(ssDesc);
+
         // Card background
         holder.cardContainer.setBackgroundColor(colors[position % colors.length]);
 
@@ -72,8 +79,8 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
             android.util.Log.d("UseCaseAdapter", "UseCase title: " + useCases.get(position).getTitle());
 
             Bundle bundle = new Bundle();
-            bundle.putInt("index", position);
-            bundle.putParcelableArrayList("useCases", new ArrayList<>(useCases));
+            bundle.putString("useCaseId", useCase.getId());
+
 
             android.util.Log.d("UseCaseAdapter", "Bundle keys: " + bundle.keySet());
             android.util.Log.d("UseCaseAdapter", "Bundle index: " + bundle.getInt("index"));
@@ -103,7 +110,7 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout cardContainer;
-        TextView textTitle, textIndustry, textScenario;
+        TextView textTitle, textIndustry, textScenario, textDescription;  // add this
         Button buttonDetails;
 
         public ViewHolder(View itemView) {
@@ -112,7 +119,9 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
             textTitle = itemView.findViewById(R.id.textTitle);
             textIndustry = itemView.findViewById(R.id.textIndustry);
             textScenario = itemView.findViewById(R.id.textScenario);
+            textDescription = itemView.findViewById(R.id.textDescription); // add this
             buttonDetails = itemView.findViewById(R.id.buttonDetails);
         }
     }
+
 }
