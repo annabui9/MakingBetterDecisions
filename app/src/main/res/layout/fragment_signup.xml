@@ -22,15 +22,15 @@
         android:id="@+id/signupTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="create account"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/logo_font"
         android:letterSpacing="0.02"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="Create Account"
+        android:textColor="#FFFFFF"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/signupEmail"
@@ -82,15 +82,15 @@
         android:id="@+id/back"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="back"
-        android:textColor="#0A1A2F"
-        android:background="@drawable/rounded_button_white"
-        android:padding="16dp"
-        android:fontFamily="@font/logo_font"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/signupButton2"
+        android:background="@drawable/rounded_button_white"
+        android:fontFamily="@font/logo_font"
+        android:padding="16dp"
+        android:text="Back"
+        android:textColor="#0A1A2F"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/signupButton2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
