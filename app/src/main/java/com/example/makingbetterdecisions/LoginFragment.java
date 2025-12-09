@@ -130,8 +130,8 @@ public class LoginFragment extends Fragment {
                                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                                         @Override
                                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            User current = snapshot.getChildren().iterator().next().getValue(User.class);
-
+//                                                            User current = snapshot.getChildren().iterator().next().getValue(User.class);
+                                                            User current = snapshot.getValue(User.class);
                                                             Bundle bundle = new Bundle();
                                                             bundle.putString(User.N_KEY, email);
                                                             NavController navController = Navigation.findNavController(v);

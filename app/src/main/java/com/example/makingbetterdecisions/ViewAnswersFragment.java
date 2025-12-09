@@ -82,18 +82,21 @@ public class ViewAnswersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        CardView Card1 = view.findViewById(R.id.Card1);
-        CardView Card2 = view.findViewById(R.id.Card2);
-        CardView Card3 = view.findViewById(R.id.Card3);
+        CardView card1 = view.findViewById(R.id.Card1);
+        CardView card2 = view.findViewById(R.id.Card2);
+        CardView card3 = view.findViewById(R.id.Card3);
 
-        Card1.setOnClickListener(v -> displayAnswers("Apple and it's left-handed Users_answers"));
+        card1.setOnClickListener(v -> displayAnswers("apple_left_handed"));
+        card2.setOnClickListener(v -> displayAnswers("deforestation"));
+        card3.setOnClickListener(v -> displayAnswers("school_monitoring"));
     }
 
-    private void displayAnswers(String title) {
+    private void displayAnswers(String useCaseId) {
         String uid = auth.getCurrentUser().getUid();
         DatabaseReference answersRef = database.getReference("users")
                 .child(uid)
-                .child(title);
+                .child("answers")
+                .child(useCaseId);
 
         answersRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -108,19 +111,23 @@ public class ViewAnswersFragment extends Fragment {
                     container.addView(noData);
                     return;
                 }
-                for (DataSnapshot qaSnapshot : snapshot.getChildren()) {
-                    String question = qaSnapshot.getKey();
-                    String answer = qaSnapshot.getValue(String.class);
+                for (DataSnapshot questionSnapshot : snapshot.getChildren()) {
 
-                    TextView questionView = new TextView(getContext());
-                    questionView.setText("Q: " + question);
-                    questionView.setTextSize(15);
-                    container.addView(questionView);
+                    String questionKey = questionSnapshot.getKey();
 
-                    TextView answerView = new TextView(getContext());
-                    answerView.setText("A: " + answer);
-                    answerView.setTextSize(12);
-                    container.addView(answerView);
+                    String answer = questionSnapshot.child("answer").getValue(String.class);
+
+                    TextView qView = new TextView(getContext());
+                    qView.setText("Q: " + questionKey);
+                    qView.setTextSize(15);
+                    qView.setPadding(0, 10, 0, 3);
+                    container.addView(qView);
+
+                    TextView aView = new TextView(getContext());
+                    aView.setText("A: " + answer);
+                    aView.setTextSize(13);
+                    aView.setPadding(20, 0, 0, 10);
+                    container.addView(aView);
                 }
             }
             @Override

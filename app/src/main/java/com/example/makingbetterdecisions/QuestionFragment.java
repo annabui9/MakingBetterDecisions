@@ -31,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuestionFragment extends Fragment {
     private FirebaseAuth auth;
@@ -119,12 +120,24 @@ public class QuestionFragment extends Fragment {
         DatabaseReference userRef = database.getReference("users").child(uid);
 
         // Convert HashMap<Question, String> to HashMap<String, String>
-        HashMap<String, String> firebaseAnswers = new HashMap<>();
-        for (Question q : answers.keySet()) {
-            String key = sanitizeFirebaseKey(q.getText()); // Use question text as key
-            String value = answers.get(q);
-            firebaseAnswers.put(key, value);
+        HashMap<String, HashMap<String, String>> firebaseAnswers = new HashMap<>();
+        for (Map.Entry<Question, String> entry : answers.entrySet()) {
+            String questionKey = sanitizeFirebaseKey(entry.getKey().getText());
+            String userAnswer = entry.getValue();
+
+            // Inner map: "answer" -> actual answer string
+            HashMap<String, String> innerMap = new HashMap<>();
+            innerMap.put("answer", userAnswer);
+
+            firebaseAnswers.put(questionKey, innerMap);
         }
+//        for (Question q : answers.keySet()) {
+//            String key = sanitizeFirebaseKey(q.getText()); // Use question text as key
+//            String value = answers.get(q);
+//            HashMap<String, String> inner = new HashMap<>();
+//            inner.put("answer", value);
+//            firebaseAnswers.put(key, inner);
+//        }
 
         // Save to Firebase
         userRef.child("answers")
