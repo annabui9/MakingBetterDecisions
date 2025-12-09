@@ -108,6 +108,7 @@ public class ViewAnswersFragment extends Fragment {
                     TextView noData = new TextView(getContext());
                     noData.setTextSize(18);
                     noData.setText("No saved answers for this use case yet");
+                    noData.setTextColor(0xFFFFFFFF);
                     container.addView(noData);
                     return;
                 }
