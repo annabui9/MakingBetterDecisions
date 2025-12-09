@@ -226,30 +226,70 @@ public class QuestionFragment extends Fragment {
                 });
     }
     private void renderQuestion(Question q) {
+
+        LinearLayout card = new LinearLayout(getContext());
+        card.setOrientation(LinearLayout.VERTICAL);
+        card.setBackgroundResource(R.drawable.question_card);
+        card.setPadding(30, 30, 30, 30);
+
         TextView qText = new TextView(getContext());
         qText.setText(q.getText());
-        qText.setTextSize(16);
-        qText.setPadding(0, 20, 0, 10);
-        qText.setTextColor(0xFFFFFFFF);
-        questionContainer.addView(qText);
+        qText.setTextSize(17);
+        qText.setTextColor(0xFF0A1A2F);
+        qText.setTypeface(getResources().getFont(R.font.logo_font));
+        qText.setPadding(0, 0, 0, 18);
+
+        card.addView(qText);
 
         if (q.isMultipleChoice()) {
+
             RadioGroup group = new RadioGroup(getContext());
+            group.setPadding(0, 10, 0, 10);
+
             for (String option : q.getOptions()) {
                 RadioButton rb = new RadioButton(getContext());
                 rb.setText(option);
+                rb.setTextColor(0xFF0A1A2F);
+                rb.setTypeface(getResources().getFont(R.font.logo_font));
+                rb.setButtonTintList(
+                        new android.content.res.ColorStateList(
+                                new int[][]{
+                                        new int[]{android.R.attr.state_checked},
+                                        new int[]{}
+                                },
+                                new int[]{
+                                        0xFF1A4BFF,
+                                        0xFFAAAAAA
+                                }
+                        )
+                );
                 group.addView(rb);
             }
-            questionContainer.addView(group);
+
+            card.addView(group);
+
         } else {
+
             EditText answer = new EditText(getContext());
             answer.setHint("Type your response...");
-            answer.setTextColor(0xFFFFFFFF);
-            answer.setHintTextColor(0xFFFFFFFF);
-            answer.setBackground(null);
-            questionContainer.addView(answer);
+            answer.setTextColor(0xFF0A1A2F);
+            answer.setHintTextColor(0x660A1A2F);
+            answer.setBackgroundResource(R.drawable.input_box);
+            answer.setPadding(30, 25, 30, 25);
+
+            card.addView(answer);
         }
+
+        questionContainer.addView(card);
+
+        View spacer = new View(getContext());
+        spacer.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                28
+        ));
+        questionContainer.addView(spacer);
     }
+
 
 
 }
