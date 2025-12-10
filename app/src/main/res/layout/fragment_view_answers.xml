@@ -12,6 +12,16 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="#0A1A2F"
+            android:fontFamily="@font/logo_font" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/Card1"
             android:layout_width="match_parent"
@@ -70,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Apple and its Left-Handed Users"
+                    android:text="Environmental Monitoring to Prevent Deforestation"
                     android:textSize="14sp"
                     android:textColor="#4A607A"
                     android:fontFamily="@font/logo_font" />
@@ -103,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Apple and its Left-Handed Users"
+                    android:text="Data Monitoring in Schools"
                     android:textSize="14sp"
                     android:textColor="#4A607A"
                     android:fontFamily="@font/logo_font" />
