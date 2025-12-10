@@ -95,23 +95,43 @@ public class QuestionFragment extends Fragment {
 
     private void saveAnswers() {
         int childIndex = 0;
-        for (Question q : questions) {
-            View inputView = questionContainer.getChildAt(childIndex + 1);
+        for (int i = 0; i < questions.size(); i++) {
 
-            if (q.isMultipleChoice() && inputView instanceof RadioGroup) {
-                RadioGroup group = (RadioGroup) inputView;
+            // Each question card is at even indexes: 0, 2, 4, ...
+            View cardView = questionContainer.getChildAt(i * 2);
+
+            Question q = questions.get(i);
+
+            if (!(cardView instanceof LinearLayout)) continue;
+
+            LinearLayout card = (LinearLayout) cardView;
+
+            // Child 0 = TextView (question)
+            // Child 1 = EditText OR RadioGroup
+            View answerView = card.getChildAt(1);
+
+            if (q.isMultipleChoice() && answerView instanceof RadioGroup) {
+                RadioGroup group = (RadioGroup) answerView;
                 int checkedId = group.getCheckedRadioButtonId();
+
                 if (checkedId != -1) {
                     RadioButton rb = group.findViewById(checkedId);
                     answers.put(q, rb.getText().toString());
                 }
-            } else if (!q.isMultipleChoice() && inputView instanceof EditText) {
-                EditText et = (EditText) inputView;
-                answers.put(q, et.getText().toString());
             }
 
-            childIndex += 2;
+            else if (!q.isMultipleChoice() && answerView instanceof EditText) {
+                EditText et = (EditText) answerView;
+                answers.put(q, et.getText().toString().trim());
+            }
+
+            for (Map.Entry<Question, String> entry : answers.entrySet()) {
+                android.util.Log.d("ANSWER_DEBUG",
+                        entry.getKey().getText() + " => " + entry.getValue());
+            }
+
         }
+
 
 
 
