@@ -119,12 +119,14 @@ public class ViewAnswersFragment extends Fragment {
                     String answer = questionSnapshot.child("answer").getValue(String.class);
 
                     TextView qView = new TextView(getContext());
+                    qView.setTextColor(0xFFFFFFFF); //sophia
                     qView.setText("Q: " + questionKey);
                     qView.setTextSize(15);
                     qView.setPadding(0, 10, 0, 3);
                     container.addView(qView);
 
                     TextView aView = new TextView(getContext());
+                    aView.setTextColor(0xFFFFFFFF); //sophia
                     aView.setText("A: " + answer);
                     aView.setTextSize(13);
                     aView.setPadding(20, 0, 0, 10);
