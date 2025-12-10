@@ -110,7 +110,7 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         LinearLayout cardContainer;
-        TextView textTitle, textIndustry, textScenario, textDescription;  // add this
+        TextView textTitle, textIndustry, textScenario, textDescription;
         Button buttonDetails;
 
         public ViewHolder(View itemView) {
@@ -119,7 +119,7 @@ public class UseCaseAdapter extends RecyclerView.Adapter<UseCaseAdapter.ViewHold
             textTitle = itemView.findViewById(R.id.textTitle);
             textIndustry = itemView.findViewById(R.id.textIndustry);
             textScenario = itemView.findViewById(R.id.textScenario);
-            textDescription = itemView.findViewById(R.id.textDescription); // add this
+            textDescription = itemView.findViewById(R.id.textDescription);
             buttonDetails = itemView.findViewById(R.id.buttonDetails);
         }
     }
