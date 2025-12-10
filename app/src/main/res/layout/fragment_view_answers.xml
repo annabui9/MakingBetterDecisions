@@ -16,7 +16,7 @@
             android:id="@+id/buttonBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
+            android:text="@string/back"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#FFFFFF"
             android:textColor="#0A1A2F"

@@ -6,10 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -85,10 +88,19 @@ public class ViewAnswersFragment extends Fragment {
         CardView card1 = view.findViewById(R.id.Card1);
         CardView card2 = view.findViewById(R.id.Card2);
         CardView card3 = view.findViewById(R.id.Card3);
+        Button back = view.findViewById(R.id.buttonBack);
 
         card1.setOnClickListener(v -> displayAnswers("apple_left_handed"));
         card2.setOnClickListener(v -> displayAnswers("deforestation"));
         card3.setOnClickListener(v -> displayAnswers("school_monitoring"));
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavController navController = Navigation.findNavController(v);
+                navController.popBackStack();
+            }
+        });
     }
 
     private void displayAnswers(String useCaseId) {
