@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp"
-        android:descendantFocusability="blocksDescendants"> <!-- ✅ ADDED -->
+        android:descendantFocusability="blocksDescendants">
 
         <!-- THANK YOU TEXT -->
         <TextView

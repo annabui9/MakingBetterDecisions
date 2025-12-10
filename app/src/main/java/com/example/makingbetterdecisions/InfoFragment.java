@@ -44,11 +44,10 @@ public class InfoFragment extends Fragment {
         howToRecyclerView.setNestedScrollingEnabled(false);
 
 
-        // LENSES section (THIS WAS WRONG BEFORE)
         lensRecyclerView = view.findViewById(R.id.lensRecyclerView);
         lensRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        CellData.getLensCells(new CellData.FirebaseCallback() {   // ← FIXED HERE
+        CellData.getLensCells(new CellData.FirebaseCallback() {
             @Override
             public void onCallBack(List<Cell> lensCells) {
                 lensAdapter = new CellAdapter(lensCells);
