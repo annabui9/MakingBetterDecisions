@@ -36,7 +36,7 @@ import java.util.Map;
 public class QuestionFragment extends Fragment {
     private FirebaseAuth auth;
     private FirebaseDatabase database;
-    private HashMap<Question, String> answers = new HashMap<>();
+    private HashMap<String, String> answers = new HashMap<>();
     private String useCaseId;
     private List<Question> questions = new ArrayList<>();
 
@@ -94,6 +94,7 @@ public class QuestionFragment extends Fragment {
 
 
     private void saveAnswers() {
+        answers.clear();
         int childIndex = 0;
         for (int i = 0; i < questions.size(); i++) {
 
@@ -116,19 +117,15 @@ public class QuestionFragment extends Fragment {
 
                 if (checkedId != -1) {
                     RadioButton rb = group.findViewById(checkedId);
-                    answers.put(q, rb.getText().toString());
+                    answers.put(q.getText(), rb.getText().toString());
                 }
             }
 
             else if (!q.isMultipleChoice() && answerView instanceof EditText) {
                 EditText et = (EditText) answerView;
-                answers.put(q, et.getText().toString().trim());
+                answers.put(q.getText(), et.getText().toString().trim());
             }
 
-            for (Map.Entry<Question, String> entry : answers.entrySet()) {
-                android.util.Log.d("ANSWER_DEBUG",
-                        entry.getKey().getText() + " => " + entry.getValue());
-            }
 
         }
 
@@ -141,8 +138,8 @@ public class QuestionFragment extends Fragment {
 
         // Convert HashMap<Question, String> to HashMap<String, String>
         HashMap<String, HashMap<String, String>> firebaseAnswers = new HashMap<>();
-        for (Map.Entry<Question, String> entry : answers.entrySet()) {
-            String questionKey = sanitizeFirebaseKey(entry.getKey().getText());
+        for (Map.Entry<String, String> entry : answers.entrySet()) {
+            String questionKey = sanitizeFirebaseKey(entry.getKey());
             String userAnswer = entry.getValue();
 
             // Inner map: "answer" -> actual answer string
