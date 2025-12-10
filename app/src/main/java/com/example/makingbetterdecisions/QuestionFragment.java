@@ -41,7 +41,7 @@ public class QuestionFragment extends Fragment {
     private List<Question> questions = new ArrayList<>();
 
     private TextView descriptionText;
-
+    private TextView detailText;
     private TextView titleText;
     private LinearLayout questionContainer;
     private Button submitButton, backButton, savePdfButton;
@@ -193,6 +193,7 @@ public class QuestionFragment extends Fragment {
 
                         titleText.setText(uc.getTitle());
                         descriptionText.setText(uc.getDescription());
+
                         loadQuestions(uc.getQuestionIds());
 
                     }
